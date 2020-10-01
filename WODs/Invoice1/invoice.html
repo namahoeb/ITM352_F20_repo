@@ -69,7 +69,7 @@
 
     <script>
 
-        //item 1
+        //item 1 Gillette Sensor 3 Razor
         document.write(`
           <tr>
             <td width="43%">${item1}</td>
@@ -80,7 +80,7 @@
 
           `)
         
-          //item 2
+          //item 2 Barbasol Shaving Cream
           document.write(`
           <tr>
             <td width="43%">${item2}</td>
@@ -91,7 +91,7 @@
 
           `)
 
-          //item 3
+          //item 3 Nautica Cologne
           document.write(`
           <tr>
             <td width="43%">${item3}</td>
@@ -102,7 +102,7 @@
 
           `)
 
-          //item 4
+          //item 4 Rubbing Alcohol
           document.write(`
           <tr>
             <td width="43%">${item4}</td>
@@ -113,7 +113,7 @@
 
           `)
 
-          //item 5
+          //item 5 Colgate Classic Toothbrush
           document.write(`
           <tr>
             <td width="43%">${item5}</td>
@@ -133,7 +133,7 @@
             <td width="54%">$<script>document.write(subtotal_price);</script></td>
           </tr>
           <tr>
-            <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Tax @ 5.75%</span></td>
+            <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Tax @ <script>document.write(tax_rate*100)</script>%</span></td>
             <td width="54%">$<script>document.write(salestax_price.toFixed(2));</script></td>
           </tr>
           <tr>
