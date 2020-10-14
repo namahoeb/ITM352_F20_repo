@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="2">
+        <tbody>
+          <tr>
+            <th style="text-align: center;" width="43%">Item</th>
+            <th style="text-align: center;" width="11%">Quantity</th>
+          </tr>
+
+    <script>
+
+        // quantities for product1, product2, ... 
+        var product_quantities = [0,1,1,3,12];
+
+        //item 1 Gillette Sensor 3 Razor
+        for(i=0; i<product_quantities.length; i++) {
+
+        document.write(`
+          <tr>
+            <td width="43%">${i+1}</td>
+            <td align="center" width="11%">${product_quantities[i]}</td>
+          </tr>
+
+          `)
+        }
+        
+    </script>
+
+
+        </tbody>
+      </table>
