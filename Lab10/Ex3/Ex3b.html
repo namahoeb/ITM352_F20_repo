@@ -11,7 +11,7 @@
     <table border="2">
         <tbody>
             <tr>
-                <th style="text-align: center;" width="43%">Item</th>
+                <th style="text-align: center;" width="43%">Product #</th>
                 <th style="text-align: center;" width="11%">Quantity</th>
                 <th style="text-align: center;" width="11%">Price</th>
                 <th style="text-align: center;" width="11%">Extended Price</th>
@@ -22,6 +22,7 @@
             <script>
 
                 // quantities for product1, product2, ... 
+                var product_quanitites = [0,1,1,3,12];
                 product1 = { 'name': 'small gumball', 'price': 0.02 };
                 product2 = { 'name': 'medium gumball', 'price': 0.05 };
                 product3 = { 'name': 'large gumball', 'price': 0.07 };
@@ -30,18 +31,18 @@
                 products = [product1, product2, product3];
                 cart_quantities = [2, 0, 4]; // corresponds to products array
 
-                //item 1 Gillette Sensor 3 Razor
+                //print out rows of product quantities
                 for (i = 0; i < cart_quantities.length; i++) {
 
                     document.write(`
           <tr>
             <td width="43%">${i + 1}</td>
             <td align="center" width="11%">${cart_quantities[i]}</td>
-            <td width="43%">${product[i]['price']}</td>
-            <td width="43%">${product[i]['price']}*cart_quantites[i]</td>
+            <td width="43%">$${products[i].price}</td>
+            <td width="43%">$${products[i].price * cart_quantities[i]}</td>
           </tr>
 
-          `)
+          `);
                 }
 
             </script>
