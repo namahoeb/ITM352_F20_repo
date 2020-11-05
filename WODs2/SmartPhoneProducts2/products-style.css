@@ -1,0 +1,61 @@
+
+/*Form styling*/
+body {
+    width:800px;
+    margin:0 auto;
+    background: url("images/phone_globe.jpg");
+    background-repeat: no-repeat center center fixed;
+    background-size: cover;
+}
+
+/*Styling the products display*/
+img {
+    width: 200px;
+    height: 200px;
+}
+
+/*Typography*/
+h1{
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 50px;
+    font-weight: 1000;
+}
+
+/*Typography*/
+h2 {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 25px;
+}
+
+/*Typography*/
+p {
+    text-align: center;
+    font-size: 20px;
+}
+
+/*General*/
+main {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-around;
+}
+
+/*block styling*/
+div {
+    border: 5px solid black;
+    display: flex;
+    width: fit-content;
+    height: 700px;
+    background-color:whitesmoke;
+}
+
+footer {
+    position: relative;
+    padding-top: 15px;
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 30px;
+    font-weight: 200;
+}
