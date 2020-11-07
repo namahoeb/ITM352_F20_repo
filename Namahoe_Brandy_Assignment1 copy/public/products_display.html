@@ -1,0 +1,80 @@
+<script>
+
+    var products = 
+    [
+      {
+      "brand" : "Icy Blue Croc",
+      "price" : 25.00,
+      "image" : "images/blue_croc.jpg"
+      },
+      {
+      "brand" : "Mint Green Croc",
+      "price" : 25.00,
+      "image" : "images/mint_croc.jpg"
+      },
+      {
+      "brand" : "Croc Slides",
+      "price" : 22.00,
+      "image" : "images/slide_croc.jpg"
+      },
+      {
+      "brand" : "Strappy Croc",
+      "price" : 24.00,
+      "image" : "images/strapped_croc.jpg"
+      },
+      {
+      "brand" : "Tie-Dye Croc",
+      "price" : 26.00,
+      "image" : "images/tiedye_croc.jpg"
+      }
+  ];
+    
+</script>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="./products-style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Croc!</title>
+</head>
+
+<body>
+    <form action="process_form" method = "POST">
+        <h1>Brandy's Croc Store</h1>
+    <div>
+        <main>
+
+
+<script>
+    //Taken code from wod3. Allows us to use the array above to print out everything in it using only a for loop
+    for(i = 0; i <= products.length; i++) {
+
+    document.write(
+    `<section class="item">
+        <h2>${products[i].brand}</h2> 
+        <p>$${products[i].price}</p> 
+        <label>Quantity</label>
+        <input type="text" placeholder="0" name ="quantity${i}" onkeyup = "checkQuantityTextbox(this);">
+        <img src= ${products[i].image}>
+    </section>      
+    `);
+    }
+    
+</script>
+
+        </main>
+    </div>
+    
+    <footer>
+        <br>
+        <br>
+        <input type="submit" value = "Purchase!">
+    </footer>
+    
+</body>
+
+</html>
