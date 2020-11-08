@@ -1,111 +1,56 @@
 /*
-    Code used from Lab 13 and Daniel Port's Assignment 1 Youtube video
+    Code used from Lab 13 and Daniel Port's Assignment 1 example video
 */
 
 // To access code from node packages
-var express = require('express');
-var myParser = require("body-parser");
-var products = require('./products.json');
+var express = require('express'); // to load express module
+var myParser = require("body-parser"); // to load and cache body parser module
+var products = require('./products.json'); // load products.json file and set to variable 'products'
 var fs = require('fs');
-var app = express(); // express app
+var app = express(); // express 'app'
+const queryString = require('query-string'); // read variable 'queryString' as the loaded query-string module
 
-app.use(myParser.urlencoded({ extended: true })); 
+app.all('*', function (request, response, next) {
+    console.log(request.method + ' to ' + request.path); // write in the console the request method and its path
+    next(); // continue
+});
+
+app.use(myParser.urlencoded({ extended: true })); // put products in the body
 
 // Response when /process_invoice is requested, when purchase form is submitted
-app.post("/process_invoice", function (request, response, next) { //Need to set to process_form to access invoice
-    let POST = request.body;
-    if(typeof POST['purchase_submit'] != 'undefined') {
-        console.log('No purchase form data');
-        next();
-    } 
+app.post("/process_invoice", function (request, response, next) { // Need to set to process_form to access invoice
+    let POST = request.body; // products packaged in body
 
-    console.log(Date.now() + ': Purchase made from ip ' + request.ip + ' data: ' + JSON.stringify(POST));
-
-    var contents = fs.readFileSync('./views/invoice.template', 'utf8');
-    response.send(eval('`' + contents + '`')); 
-
-    // Uses function to display invoice
-    function display_invoice_table_rows() {
-        subtotal = 0;
-        str = '';
+    //check if quantities are nonnegative integers 
+    if (typeof POST['submitPurchase'] != 'undefined') {
+        var hasvalidquantities = true; // creating a varibale assuming that it'll be true
+        var hasquantities = false
         for (i = 0; i < products.length; i++) {
-            qty = 0;
-            val = POST[`quantity${i}`];
-            if(isNonNegInt(val)) {
-                qty = val;
-            }
-            if (qty > 0) {
-                // product row
-                extended_price = qty * products[i].price
-                subtotal += extended_price;
-                str += (`
-      <tr>
-        <td align="center" width="43%">${products[i].name}</td>
-        <td align="center" width="11%">${qty}</td>
-        <td align="center" width="13%">\$${products[i].price}</td>
-        <td align="center" width="54%">\$${extended_price}</td>
-      </tr>
-      `);
-            }
+            
+                        qty=POST[`quantity${i}`];
+                        hasquantities=hasquantities || qty>0; // If it has a value bigger than 0 then it is good
+                        hasvalidquantities=hasvalidquantities && isNonNegInt(qty);    // if it is both a quantity over 0 and is valid    
+        } 
+        // if all quantities are valid, generate the invoice// 
+        const stringified = queryString.stringify(POST);
+        if (hasvalidquantities && hasquantities) {
+            response.redirect("./invoice.html?"+stringified); // using the invoice.html and all the data that is input
+        }  
+        else { 
+            response.redirect("./products_display.html?" + stringified) 
         }
-        // Compute tax
-        tax_rate = 0.0575;
-        tax = tax_rate * subtotal;
-
-        // Compute shipping
-        if (subtotal <= 50) {
-            shipping = 2;
-        }
-        else if (subtotal <= 100) {
-            shipping = 5;
-        }
-        else {
-            shipping = 0.05 * subtotal; // 5% of subtotal
-        }
-
-        // Compute grand total
-        total = subtotal + tax + shipping;
-        
-        return str;
     }
-
 });
 
-// Function to check whether a quantity is a non-negative integer
+//repeats the isNonNegInt function from the products_display.html file 
 function isNonNegInt(q, returnErrors = false) {
-    errors = []; // assume no errors at first
-    if (Number(q) != q) {
-        errors.push('Not a number!');// Check if string is a number value
-    } else {
-        if (q < 0) errors.push('Negative value!'); // Check if it is non-negative
-        if (parseInt(q) != q) errors.push('Not an integer!'); // Check that it is an integer
-    }
-    return returnErrors ? errors : ((errors.length > 0) ? false : true);
+    errors = []; // assume that quantity data is valid 
+    if (q == "") { q = 0; }
+    if (Number(q) != q) errors.push('Not a number!'); //check if the string is a number
+    if (q < 0) errors.push('Negative value!'); //check if value is a positive
+    if (parseInt(q) != q) errors.push('Not an integer!'); //check if value is an integer
+    return returnErrors ? errors : (errors.length == 0);
 }
 
-// Response when /store is requested
-app.get("/store", function (request, response) {
-    var contents = fs.readFileSync('./views/display_products.template', 'utf8');
-    response.send(eval('`' + contents + '`')); // render template string
-
-    // Calls on this function to display products in /store page
-    function display_products() {
-        str = '';
-        for (i = 0; i < products.length; i++) {
-            str += `
-                <section class="item">
-                    <h3>${products[i].name}</h3>
-                    <p><img src="${products[i].image}"></p>
-                    <p>$${products[i].price.toFixed(2)}</p>
-                    <p><label id="quantity${i}_label"}">Quantity:</label></p>
-                    <p><input type="text" placeholder="0" name="quantity${i}"
-                    onkeyup="checkQuantityTextbox(this);"></p>
-                </section>
-            `;
-        }
-        return str;
-    }
-});
-app.use(express.static('./public')); 
-
-var listener = app.listen(8080, () => { console.log('server started listening on port ' + listener.address().port) });
+app.use(express.static('./public')); // root in the 'public' directory so that express will serve up files from here
+app.listen(8080, () => console.log(`listening on port 8080`)); //run the server on port 8080 and show it in the console
