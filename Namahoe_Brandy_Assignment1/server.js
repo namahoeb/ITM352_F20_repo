@@ -5,7 +5,7 @@
 // To access code from node packages
 var express = require('express'); // to load express module
 var myParser = require("body-parser"); // to load and cache body parser module
-var products = require('./products.json'); // load products.json file and set to variable 'products'
+var products = require('./products.js'); // load products.json file and set to variable 'products'
 var fs = require('fs');
 var app = express(); // express 'app'
 const queryString = require('query-string'); // read variable 'queryString' as the loaded query-string module
