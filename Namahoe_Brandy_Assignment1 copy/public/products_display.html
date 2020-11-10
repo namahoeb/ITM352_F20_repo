@@ -1,0 +1,134 @@
+<script>
+
+    var products = 
+    [
+      {
+      "item" : "Icy Blue Croc",
+      "price" : 25.00,
+      "image" : "images/blue_croc.jpg"
+      },
+      {
+      "item" : "Mint Green Croc",
+      "price" : 25.00,
+      "image" : "images/mint_croc.jpg"
+      },
+      {
+      "item" : "Croc Slides",
+      "price" : 22.00,
+      "image" : "images/slide_croc.jpg"
+      },
+      {
+      "item" : "Strappy Croc",
+      "price" : 24.00,
+      "image" : "images/strapped_croc.jpg"
+      },
+      {
+      "item" : "Tie-Dye Croc",
+      "price" : 26.00,
+      "image" : "images/tiedye_croc.jpg"
+      }
+  ];
+    
+</script>
+
+<script src="./products.js" type="text/javascript"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="./products-style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Croc!</title>
+</head>
+
+<body>
+
+
+    <!-- Starting a form -->
+    <form name = "product_display" action="/process_form" method = "POST">
+        </form>
+        <h1>Brandy's Croc Store</h1>
+    <div>
+        <main>
+
+
+<script>
+
+    // derived from WOD Smartphones 3. Loop for product information
+    for(i = 0; i <= products.length; i++) {
+    document.write(
+    `<section class="item">
+        <h2>${products[i].item}</h2> 
+        <p>$${products[i].price}</p> 
+        <label>Quantity</label>
+        <input type="text" placeholder="0" name ="quantity${i}" onkeyup = "checkQuantityTextbox(this);">
+        <img src= ${products[i].image}>
+    </section>      
+    `);
+    }
+    
+   // executes webpage
+   window.onload = function () 
+    {
+        let params = (new URL(document.location)).searchParams; // this is to get the string that has the form data
+
+        // if statement to check valid quantities
+        if (params.has('submitPurchase'))
+        {
+            gotErrors = false;
+            total_qty = 0;
+
+            // making loop to that lists the products
+            for (i=0; i < products.length; i++)
+            {
+                if(params.has(`quantity${i}`))
+                {
+                    quantity = params.get(`quantity${i}`);
+                    product_form[`quantity${i}`].value = quantity;
+                    total_qty += quantity;
+                    if (!isNonNegInt(quantity))
+                    {
+                        gotErrors = true;
+
+                        // checks where an error is
+                        checkQuantityTextbox(product_form[`quantity${i}`])
+                    }
+                }
+            }
+            if (gotErrors)
+            {
+                alert("Enter a valid quantity"); // check ig quantity value is valid or invalid
+            }
+            else if (total_qty == 0)
+            {
+                alert("Your shopping cart is empty!"); // check is cart is filled or empty
+            }
+            else
+            {
+                window.location = `./invoice.html${document.location.search}`; // the page will redirect you to the invoice
+                window.stop
+            }
+        }
+    }
+
+</script>
+
+        </main>
+    </div>
+    
+    <footer>
+        <br>
+        <a href="./invoice.html">Cart</a>
+        <br>
+        <br>
+        <input type="submit" value = "Checkout">
+        <br>
+        <p>There's a croc for every body!</p>
+
+    </footer>
+    
+</body>
+
+</html>
