@@ -3,27 +3,27 @@
     var products = 
     [
       {
-      "brand" : "Icy Blue Croc",
+      "item" : "Icy Blue Croc",
       "price" : 25.00,
       "image" : "images/blue_croc.jpg"
       },
       {
-      "brand" : "Mint Green Croc",
+      "item" : "Mint Green Croc",
       "price" : 25.00,
       "image" : "images/mint_croc.jpg"
       },
       {
-      "brand" : "Croc Slides",
+      "item" : "Croc Slides",
       "price" : 22.00,
       "image" : "images/slide_croc.jpg"
       },
       {
-      "brand" : "Strappy Croc",
+      "item" : "Strappy Croc",
       "price" : 24.00,
       "image" : "images/strapped_croc.jpg"
       },
       {
-      "brand" : "Tie-Dye Croc",
+      "item" : "Tie-Dye Croc",
       "price" : 26.00,
       "image" : "images/tiedye_croc.jpg"
       }
@@ -31,6 +31,7 @@
     
 </script>
 
+<script src="./products.js" type="text/javascript"></script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,19 +44,23 @@
 </head>
 
 <body>
-    <form action="process_form" method = "POST">
+
+
+    <!-- Starting a form -->
+    <form name = "product_display" action="/process_form" method = "POST">
+        </form>
         <h1>Brandy's Croc Store</h1>
     <div>
         <main>
 
 
 <script>
-    //Taken code from wod3. Allows us to use the array above to print out everything in it using only a for loop
-    for(i = 0; i <= products.length; i++) {
 
+    // derived from WOD Smartphones 3. Loop for product information
+    for(i = 0; i <= products.length; i++) {
     document.write(
     `<section class="item">
-        <h2>${products[i].brand}</h2> 
+        <h2>${products[i].item}</h2> 
         <p>$${products[i].price}</p> 
         <label>Quantity</label>
         <input type="text" placeholder="0" name ="quantity${i}" onkeyup = "checkQuantityTextbox(this);">
@@ -68,11 +73,13 @@
    window.onload = function () 
     {
         let params = (new URL(document.location)).searchParams; // this is to get the string that has the form data
-        // if statement to figure out if we're good to go with no bad quantities
+
+        // if statement to check valid quantities
         if (params.has('submitPurchase'))
         {
-            gotErrors = false; // just gonna set this to false from the start
-            total_qty = 0; 
+            gotErrors = false;
+            total_qty = 0;
+
             // making loop to that lists the products
             for (i=0; i < products.length; i++)
             {
@@ -92,11 +99,11 @@
             }
             if (gotErrors)
             {
-                alert("Enter a valid quantity"); // for letting you know that the quantity value is invalid
+                alert("Enter a valid quantity"); // check ig quantity value is valid or invalid
             }
             else if (total_qty == 0)
             {
-                alert("Your shopping cart is empty!"); // tells you have nothing in your cart
+                alert("Your shopping cart is empty!"); // check is cart is filled or empty
             }
             else
             {
@@ -113,7 +120,10 @@
     
     <footer>
         <br>
-        <input type="submit" value = "Purchase!">
+        <a href="./invoice.html">Cart</a>
+        <br>
+        <br>
+        <input type="submit" value = "Checkout">
         <br>
         <p>There's a croc for every body!</p>
 

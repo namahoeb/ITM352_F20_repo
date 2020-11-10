@@ -1,27 +1,27 @@
 var products = 
 [
   {
-  "brand" : "Icy Blue Croc",
+  "item" : "Icy Blue Croc",
   "price" : 25.00,
   "image" : "images/blue_croc.jpg"
   },
   {
-  "brand" : "Mint Green Croc",
+  "item" : "Mint Green Croc",
   "price" : 25.00,
   "image" : "images/mint_croc.jpg"
   },
   {
-  "brand" : "Croc Slides",
+  "item" : "Croc Slides",
   "price" : 22.00,
   "image" : "images/slide_croc.jpg"
   },
   {
-  "brand" : "Strappy Croc",
+  "item" : "Strappy Croc",
   "price" : 24.00,
   "image" : "images/strapped_croc.jpg"
   },
   {
-  "brand" : "Tie-Dye Croc",
+  "item" : "Tie-Dye Croc",
   "price" : 26.00,
   "image" : "images/tiedye_croc.jpg"
   }

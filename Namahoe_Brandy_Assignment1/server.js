@@ -1,5 +1,6 @@
 /*
-    Code used from Lab 13 and Daniel Port's Assignment 1 example video
+    Coded By: Brandy Namahoe
+    Parts of code used from Lab 13 and Daniel Port's Assignment 1 example video
 */
 
 // To access code from node packages
@@ -17,9 +18,11 @@ app.all('*', function (request, response, next) {
 
 app.use(myParser.urlencoded({ extended: true })); // put products in the body
 
-// Response when /process_invoice is requested, when purchase form is submitted
-app.post("/process_invoice", function (request, response, next) { // Need to set to process_form to access invoice
+// Response when /process_form is requested, when purchase form is submitted
+app.post("process_form", function (request, response, next) { // to access invoice
     let POST = request.body; // products packaged in body
+    params = request.query;
+    console.log(params);
 
     //check if quantities are nonnegative integers 
     if (typeof POST['submitPurchase'] != 'undefined') {
@@ -28,10 +31,10 @@ app.post("/process_invoice", function (request, response, next) { // Need to set
         for (i = 0; i < products.length; i++) {
             
                         qty=POST[`quantity${i}`];
-                        hasquantities=hasquantities || qty>0; // If it has a value bigger than 0 then it is good
+                        hasquantities=hasquantities || qty>0; // If it has a value larger than 0 then it is good
                         hasvalidquantities=hasvalidquantities && isNonNegInt(qty);    // if it is both a quantity over 0 and is valid    
         } 
-        // if all quantities are valid, generate the invoice// 
+        // if all quantities are valid, will generate the invoice
         const stringified = queryString.stringify(POST);
         if (hasvalidquantities && hasquantities) {
             response.redirect("./invoice.html?"+stringified); // using the invoice.html and all the data that is input
