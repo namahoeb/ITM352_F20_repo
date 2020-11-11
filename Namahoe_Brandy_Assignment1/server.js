@@ -1,37 +1,37 @@
 /*
     Coded By: Brandy Namahoe
-    Parts of code used from Lab 13 and Daniel Port's Assignment 1 example video
+    Parts of code used from Lab 13, Daniel Port's Assignment 1 example video, Jojo Lau's server.js code, Joshua Rio's server.js code, and Alyssa Mencel's server.js code
 */
 
 // To access code from node packages
-var express = require('express'); // to load express module
-var myParser = require("body-parser"); // to load and cache body parser module
-var products = require('./products.js'); // load products.json file and set to variable 'products'
+var express = require('express'); // To load express module
+var myParser = require("body-parser"); // To load and cache body parser module
+var products = require('./products.js'); // To load products.json file and set to variable 'products'
 var fs = require('fs');
-var app = express(); // express 'app'
-const queryString = require('query-string'); // read variable 'queryString' as the loaded query-string module
+var app = express(); // To load express 'app'
+const queryString = require('query-string'); // Read variable 'queryString' as the loaded query-string module
 
 app.all('*', function (request, response, next) {
-    console.log(request.method + ' to ' + request.path); // write in the console the request method and its path
-    next(); // continue
+    console.log(request.method + ' to ' + request.path); // Write in the console the request method and its path
+    next();
 });
 
-app.use(myParser.urlencoded({ extended: true })); // put products in the body
+app.use(myParser.urlencoded({ extended: true })); // puts products in the body
 
-// Response when /process_form is requested, when purchase form is submitted
-app.post("process_form", function (request, response, next) { // to access invoice
-    let POST = request.body; // products packaged in body
+// Response when /process_form is requested or purchase form is submitted
+app.post("process_form", function (request, response, next) { // accesses invoice page
+    let POST = request.body; // products POSTed in body
     params = request.query;
     console.log(params);
 
     //check if quantities are nonnegative integers 
     if (typeof POST['submitPurchase'] != 'undefined') {
-        var hasvalidquantities = true; // creating a varibale assuming that it'll be true
+        var hasvalidquantities = true; // creating a variable assuming that it is true
         var hasquantities = false
         for (i = 0; i < products.length; i++) {
             
                         qty=POST[`quantity${i}`];
-                        hasquantities=hasquantities || qty>0; // If it has a value larger than 0 then it is good
+                        hasquantities=hasquantities || qty>0; // If it has a value larger than 0 then it is valid
                         hasvalidquantities=hasvalidquantities && isNonNegInt(qty);    // if it is both a quantity over 0 and is valid    
         } 
         // if all quantities are valid, will generate the invoice

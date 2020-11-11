@@ -1,3 +1,8 @@
+<!--
+    Coded by Brandy Namahoe, using code from Smartphone's WOD, Daniel Port's Assignment 1 Example Video, and parts of Alvin Almira's code for Data Validation
+    Creates the product page
+-->
+
 <script>
 
     var products = 
@@ -46,7 +51,7 @@
 <body>
 
 
-    <!-- Starting a form -->
+    <!--Creating the product_display form-->
     <form name = "product_display" action="/process_form" method = "POST">
         </form>
         <h1>Brandy's Croc Store</h1>
@@ -56,7 +61,7 @@
 
 <script>
 
-    // derived from WOD Smartphones 3. Loop for product information
+    // derived from WOD Smartphones 3
     for(i = 0; i <= products.length; i++) {
     document.write(
     `<section class="item">
@@ -69,18 +74,18 @@
     `);
     }
     
-   // executes webpage
+ /*  // Executes webpage
    window.onload = function () 
     {
-        let params = (new URL(document.location)).searchParams; // this is to get the string that has the form data
+        let params = (new URL(document.location)).searchParams; // String for form data
 
-        // if statement to check valid quantities
+        // 'if' statement to check valid quantities
         if (params.has('submitPurchase'))
         {
             gotErrors = false;
             total_qty = 0;
 
-            // making loop to that lists the products
+            // loop to that lists the products quantities
             for (i=0; i < products.length; i++)
             {
                 if(params.has(`quantity${i}`))
@@ -111,7 +116,7 @@
                 window.stop
             }
         }
-    }
+    }*/
 
 </script>
 

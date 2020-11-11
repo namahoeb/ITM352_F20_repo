@@ -1,3 +1,8 @@
+<!--
+    Coded by Brandy Namahoe, parts of code from Invoice 4 WOD, Daniel Port's Assignment 1 Example video, and Lab12.
+    Creating the invoice/reciept
+-->
+
 <script>
     var products =
         [
@@ -115,7 +120,7 @@
             </tr>
 
             <script>
-                // Defining subtotal; derived from SmartPhoneProducts
+                // Computing subtotal; derived from SmartPhoneProducts
                 subTotal = 0;
                 for (i = 0; i < products.length; i++) {
                     if (quantities[i] > 0) {
@@ -133,11 +138,11 @@
                     }
                 }
 
-                // Tax rate, derived from Invoice WOD
+                // Computing Tax rate, derived from Invoice WOD
                 var salesTax = 0.0471;
                 var tax = subTotal * salesTax;
 
-                // Compute shipping costs, derived from Invoice WOD
+                // Computing shipping costs, derived from Invoice WOD
                 if (subTotal <= 50) {
                     shipping = 2;
                 } else if (subTotal <= 100) {
@@ -146,7 +151,7 @@
                     shipping = subTotal * 0.05;
                 }
 
-                // Grand total, similar to Invoice WOD
+                // CComputing Grand total, derived from Invoice WOD
                 var grandTotal = subTotal + tax + shipping;
             </script>
 
@@ -162,6 +167,8 @@
                     </script>
                 </td>
             </tr>
+
+            <!--Generating the totals within a table-->
             <tr>
                 <td style="text-align: center;" colspan="3" width="67%"><span>Tax @
                         <script>document.write(salesTax * 100)</script>%</span></td>

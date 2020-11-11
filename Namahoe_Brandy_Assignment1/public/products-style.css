@@ -1,3 +1,9 @@
+/*
+    Coded by Brandy Namahoe, Using parts of code from Smartphone WOD and Daniel Port's Assignemnt 1 Example Code
+    Styles Product's Page
+*/
+
+
 body {
     width:800px;
     margin:0 auto;
@@ -98,6 +104,7 @@ section{
     height: 215px;
 }
 
+/* Styling the label "Quantity" */
 section label {
     color: black;
     line-height: 30px;
@@ -109,6 +116,7 @@ section label {
     font-size: 18px;
 }
 
+/* Styling textbox */
 section input {
     color: black;
     background: white (240, 238, 238);
@@ -123,6 +131,7 @@ section input {
     z-index: 2000;
 }
 
+/* Styling input to text box */
 input {
     background: white;
     box-shadow: inset 1px 1px 1px white;

@@ -1,3 +1,8 @@
+<!--
+    Coded by Brandy Namahoe, using code from Smartphone's WOD, Daniel Port's Assignment 1 Example Video, and parts of Alvin Almira's code for Data Validation
+    Creates the product page
+-->
+
 <script>
 
     var products = 
@@ -46,7 +51,7 @@
 <body>
 
 
-    <!-- Starting a form -->
+    <!--Creating the product_display form-->
     <form name = "product_display" action="/process_form" method = "POST">
         </form>
         <h1>Brandy's Croc Store</h1>
@@ -56,7 +61,7 @@
 
 <script>
 
-    // derived from WOD Smartphones 3. Loop for product information
+    // derived from WOD Smartphones 3
     for(i = 0; i <= products.length; i++) {
     document.write(
     `<section class="item">
@@ -69,49 +74,6 @@
     `);
     }
     
-   // executes webpage
-   window.onload = function () 
-    {
-        let params = (new URL(document.location)).searchParams; // this is to get the string that has the form data
-
-        // if statement to check valid quantities
-        if (params.has('submitPurchase'))
-        {
-            gotErrors = false;
-            total_qty = 0;
-
-            // making loop to that lists the products
-            for (i=0; i < products.length; i++)
-            {
-                if(params.has(`quantity${i}`))
-                {
-                    quantity = params.get(`quantity${i}`);
-                    product_form[`quantity${i}`].value = quantity;
-                    total_qty += quantity;
-                    if (!isNonNegInt(quantity))
-                    {
-                        gotErrors = true;
-
-                        // checks where an error is
-                        checkQuantityTextbox(product_form[`quantity${i}`])
-                    }
-                }
-            }
-            if (gotErrors)
-            {
-                alert("Enter a valid quantity"); // check ig quantity value is valid or invalid
-            }
-            else if (total_qty == 0)
-            {
-                alert("Your shopping cart is empty!"); // check is cart is filled or empty
-            }
-            else
-            {
-                window.location = `./invoice.html${document.location.search}`; // the page will redirect you to the invoice
-                window.stop
-            }
-        }
-    }
 
 </script>
 
