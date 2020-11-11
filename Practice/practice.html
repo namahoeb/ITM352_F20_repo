@@ -64,3 +64,55 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+// Executes webpage
+window.onload = function () 
+ {
+     let params = (new URL(document.location)).searchParams; // String for form data
+
+     // 'if' statement to check valid quantities
+     if (params.has('submitPurchase'))
+     {
+         gotErrors = false;
+         total_qty = 0;
+
+         // loop to that lists the products quantities
+         for (i=0; i < products.length; i++)
+         {
+             if(params.has(`quantity${i}`))
+             {
+                 quantity = params.get(`quantity${i}`);
+                 product_form[`quantity${i}`].value = quantity;
+                 total_qty += quantity;
+                 if (!isNonNegInt(quantity))
+                 {
+                     gotErrors = true;
+
+                     // checks where an error is
+                     checkQuantityTextbox(product_form[`quantity${i}`])
+                 }
+             }
+         }
+         if (gotErrors)
+         {
+             alert("Enter a valid quantity"); // check ig quantity value is valid or invalid
+         }
+         else if (total_qty == 0)
+         {
+             alert("Your shopping cart is empty!"); // check is cart is filled or empty
+         }
+         else
+         {
+             window.location = `./invoice.html${document.location.search}`; // the page will redirect you to the invoice
+             window.stop
+         }
+     }
+ }
