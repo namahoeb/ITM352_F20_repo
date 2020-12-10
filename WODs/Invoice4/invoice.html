@@ -1,84 +1,92 @@
 <script>
+
+  // This is an invoice for products
+
   // Products array
   var products = [
 
-    // Product objects
+    // Product 1
     {
-      "brand": "HTC",
-      "price": 40.00,
-      "image": "http://dport96.github.io/ITM352/morea/080.flow-control-II/HTC.jpg"
+      'product': "HTC",
+      'price': 40.00,
+      'image': "http://dport96.github.io/ITM352/morea/080.flow-control-II/HTC.jpg",
     },
 
+    // Product 2
     {
-      "brand": "Apple",
-      "price": 75.00,
-      "image": "http://dport96.github.io/ITM352/morea/080.flow-control-II/iphone-3gs.jpg"
+      'product': "Apple",
+      'price': 75.00,
+      'image': "http://dport96.github.io/ITM352/morea/080.flow-control-II/iphone-3gs.jpg",
     },
 
+    // Product 3
     {
-      "brand": "Nokia",
-      "price": 35.00,
-      "image": "http://dport96.github.io/ITM352/morea/080.flow-control-II/Nokia.jpg"
+      'product': "Nokia",
+      'price': 35.00,
+      'image': "http://dport96.github.io/ITM352/morea/080.flow-control-II/Nokia.jpg",
     },
 
+    // Product 4
     {
-      "brand": "Samsung",
-      "price": 45.00,
-      "image": "http://dport96.github.io/ITM352/morea/080.flow-control-II/Samsung.jpg"
+      'product': "Samsung",
+      'price': 45.00,
+      'image': "http://dport96.github.io/ITM352/morea/080.flow-control-II/Samsung.jpg",
     },
 
+    // Product 5
     {
-      "brand": "Blackberry",
-      "price": 10.00,
-      "image": "http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg"
-    }
-  ];
+      'product': "Blackberry",
+      'price': 10.00,
+      'image': "http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg",
+    }];
 
-  // Product quantities
-  var quantities = [2, 3, 4, 5, 6];
+  // Product Quantites
+  var quantities = [0, -2, 4.5, two, 6];
 
-  // Subtotal
+  // compute subtotal
   var subtotal = 0;
 
   // Function to generate row items
   function generate_item_rows(product_quantities_array) {
-    for (i = 0; i < product_quantities_array.length; i++) {
-      errors = isNonNegInt(product_quantities_array[i], true);
+    for (i = 0; i, product_quantities_array.length; i++) {
 
-      if(errors.length == 0) {  
-        var extended_price = quantities[i] * products[i].price;
-        subtotal += extended_price;
+      if(isNonNegIntString(product_quantities_array[i])) {
+        product_quantities_array[i] = 0;
       }
 
-      if(product_quantities_array[i] == 0) {
+      if (product_quantities_array[i] == 0) {
         continue;
-      }
+      };
 
-      else {
-        product_quantities_array[i] = `${product_quantities_array[i]}<br><font color="red">${errors}</font>`;
-        extended_price = 0;
-      }
-
+      var extended_price = products[i].price * quantities[i];
+      var subtotal = extended_price + subtotal;
       document.write(`
-          <tr>
-            <td width="43%">${products[i].brand}</td>
-            <td align="center" width="11%">${product_quantities_array[i]}</td>
-            <td width="13%">$${products[i].price}</td>
-            <td width="54%">$${extended_price}</td>
-          </tr>
-          `);
+              <tr>
+                <td width="43%">${products[i].product}</td>
+                <td align="center" width="11%">${product_quantities_array[i]}</td>
+                <td width="13%">\$${products[i].price}</td>
+                <td width="54%">\$${extended_price}</td>
+              </tr>
+    
+              `);
     }
-  }
+  };
 
-  function isNonNegInt(val, returnErrors) {
+  function isNonNegIntString(string_to_check, returnErrors = false) {
+    /*
+    this function will return true if string_to_check is a non-neg integer.
+    If retunrError=true it will return the array of reasons it is not a non-neg integer.
+    */
     errors = []; // assume no errors at first
-    if (Number(val) != val) errors.push('Not a number!'); // Check if string is a number value
-    if (val < 0) errors.push('Negative value!'); // Check if it is non-negative
-    if (parseInt(val) != val) errors.push('Not an integer!'); // Check that it is an integer
-    return returnErrors ? errors : ((errors.length > 0) ? false : true);
-  }
+    if (Number(string_to_check) != string_to_check) errors.push('Not a number!'); // Check if string is a number value
+    if (string_to_check < 0) errors.push('Negative value!'); // Check if it is non-negative
+    if (parseInt(string_to_check) != string_to_check) errors.push('Not an integer!'); // Check that it is an integer
+    return returnErrors ? errors : (errors.length == 0);
 
 </script>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +94,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invoice</title>
+  <title>Invoice 4</title>
 </head>
 
 <body>
@@ -100,27 +108,33 @@
       </tr>
 
       <script>
-        // Generate row items
-        generate_item_rows(quantities);
 
-        // Compute sales tax
-        var tax_rate = 0.0575;
-        var sales_tax = subtotal * tax_rate;
+    // Generate row items
+    generate_item_rows(quantities);
 
-        // Compute shipping costs
-        if (subtotal <= 50) {
-          shipping_cost = 2;
-        } else if (subtotal <= 100) {
-          shipping_cost = 5;
-        } else {
-          shipping_cost = subtotal * 0.05;
-        }
+    // Compute sales tax
+    var tax_rate = 0.0575;
+    var salestax_price = subtotal * tax_rate;
 
-        // Compute grand total
-        var grand_total = subtotal + sales_tax;
+    //Compute Shipping price
+    if (subtotal <= 50) {
+      shipping = 2;
+    }
+    else if (subtotal <= 100) {
+      shipping = 5;
+    }
+    else {
+      shipping = 0.05 * subtotal; //5% of subtotal
+    }
 
+    // Compute grand total
+    var total_price = subtotal + salestax_price + shipping;
 
       </script>
+
+      <tr>
+        <td colspan="4" width="100%">&nbsp;</td>
+      </tr>
 
       <tr>
         <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
@@ -128,33 +142,30 @@
           <script>document.write(subtotal);</script>
         </td>
       </tr>
+
       <tr>
-        <td style="text-align: center;" colspan="3" width="67%"><span>Tax @ 5.75%</span>
-        </td>
+        <td style="text-align: center;" colspan="3" width="67%"><span>Tax @
+            <script>document.write(tax_rate * 100)</script>%</span></td>
         <td width="54%">$
-          <script>document.write(sales_tax.toFixed(2));</script>
+          <script>document.write(salestax_price.toFixed(2));</script>
         </td>
       </tr>
+
       <tr>
-        <td style="text-align: center;" colspan="3" width="67%"><span>Shipping</span></td>
+        <td style="text-align: center;" colspan="3" width="67%">Shipping</td>
         <td width="54%">$
-          <script>document.write(shipping_cost.toFixed(2));</script>
+          <script>document.write(shipping.toFixed(2));</script>
         </td>
       </tr>
+
       <tr>
         <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
         <td width="54%"><strong>$
-            <script>document.write(grand_total.toFixed(2));</script></strong></td>
+            <script>document.write(total_price.toFixed(2));</script></strong></td>
       </tr>
+
     </tbody>
   </table>
-  
-</body>
-<br>
-<b>OUR SHIPPING POLICY IS:</b> <br>
-<b><p>A subtotal $0 - $49.99 will be $2 shipping.</p>
-<p>A subtotal $50 - $99.99 will be $5 shipping.</p>
-<p>Subtotals over $100 will be charged 5% of the subtotal amount.</p></b>
 </body>
 
-</html>
+  </html>

@@ -48,7 +48,6 @@ if(typeof users_reg_data[request.body.username] != 'undefined') {
         response.send(`Hey! ${request.body.username} does not`)
     }
     console.log(users_reg_data['itm352']['password']=='xxx');
-}
 
 
 app.listen(8080, () => console.log(`listening on port 8080`));

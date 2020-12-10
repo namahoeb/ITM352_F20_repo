@@ -15,10 +15,5 @@ if(typeof users_reg_data['itm352'] != 'undefined') {
     console.log(users_reg_data['itm352']['password']=='xxx');
 }
 
-console.log(`ERR : ${user_data_filename} does not exist!!!`)
-
-//console.log(users_reg_data, typeof users_reg_data, typeof data);
-
-//console.log(users_reg_data['dport']['password']); // shows password for dport
-
+console.log(`${user_data_filename} has xxx characters`)
 
