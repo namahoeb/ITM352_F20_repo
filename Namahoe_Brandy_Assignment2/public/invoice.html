@@ -3,54 +3,24 @@
     Creating the invoice/reciept
 -->
 
-<script>
-    var products =
-        [
-            {
-                "item": "Icy Blue Croc",
-                "price": 25.00,
-                "image": "images/blue_croc.jpg"
-            },
-            {
-                "item": "Mint Green Croc",
-                "price": 25.00,
-                "image": "images/mint_croc.jpg"
-            },
-            {
-                "item": "Croc Slides",
-                "price": 22.00,
-                "image": "images/slide_croc.jpg"
-            },
-            {
-                "item": "Strappy Croc",
-                "price": 24.00,
-                "image": "images/strapped_croc.jpg"
-            },
-            {
-                "item": "Tie-Dye Croc",
-                "price": 26.00,
-                "image": "images/tiedye_croc.jpg"
-            }
-        ];
-</script>
-
-<script src = ".products.js" type = "text/javascript"> // GET requet for product array
+<script src = "./product_data.js" type = "text/javascript"> // GET requet for product array
 </script>
 
 <script>
-    // Used code from Lab12 to get data from quantity textbox
-    let params = (new URL(document.location)).searchParams; // looks for quanitites
-
+    // Used code from Lab12 and Assignment 1 examples to get data from quantity textbox
+    let params = (new URL(document.location)).searchParams; // looks for quanitites from submitPurchase query string
     var quantities = [];
 
-    // From example from Assignment1
-    if (params.has('purchase_submit')) {
+    // From Assignment1 Example to process the invoice to create the form from the data entered
+    if (params.has('submitPurchase')) { // Loop that pulls the data
         for (i = 0; i < products.length; i++) {
             if (params.has(`quantity${i}`)) {
                 a_qty = params.get(`quantity${i}`);
                 quantities[i] = a_qty;
             }
         }
+    } else {
+        document.write('Please enter a valid quantity!'); // Checks for valid quantities
     }
     console.log(quantities);
 </script>
@@ -121,12 +91,12 @@
 
             <script>
                 // Computing subtotal; derived from SmartPhoneProducts
-                subTotal = 0;
+                subtotal = 0;
                 for (i = 0; i < products.length; i++) {
                     if (quantities[i] > 0) {
                         // Product rows
                         extended_price = quantities[i] * products[i].price
-                        subTotal += extended_price;
+                        subtotal += extended_price;
                         document.write(`
                         <tr>
                             <td width="43%">${products[i].item}</td>
@@ -139,36 +109,35 @@
                 }
 
                 // Computing Tax rate, derived from Invoice WOD
-                var salesTax = 0.0471;
-                var tax = subTotal * salesTax;
+                var salesTax = 0.0575;
+                var tax = subtotal * salesTax;
 
                 // Computing shipping costs, derived from Invoice WOD
-                if (subTotal <= 50) {
+                if (subtotal <= 50) {
                     shipping = 2;
-                } else if (subTotal <= 100) {
+                } else if (subtotal <= 100) {
                     shipping = 5;
                 } else {
-                    shipping = subTotal * 0.05;
+                    shipping = subtotal * 0.05; // 5% of subtotal
                 }
 
-                // CComputing Grand total, derived from Invoice WOD
-                var grandTotal = subTotal + tax + shipping;
+                // Computing Grand total, derived from Invoice WOD
+                var grandTotal = subtotal + tax + shipping;
             </script>
 
             <tr>
                 <td colspan = "4"></td>
+                <!--Generating the totals within a table-->
             </tr>
 
             <tr>
                 <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
                 <td width="54%">$
                     <script>
-                        document.write(subTotal.toFixed(2));
+                        document.write(subtotal.toFixed(2));
                     </script>
                 </td>
             </tr>
-
-            <!--Generating the totals within a table-->
             <tr>
                 <td style="text-align: center;" colspan="3" width="67%"><span>Tax @
                         <script>document.write(salesTax * 100)</script>%</span></td>

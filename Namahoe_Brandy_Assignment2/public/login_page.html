@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="products-style.css">
+
+
+    <title>
+        Croc Store
+    </title>
+</head>
+
+<script> // Used Store Template from w3 schools. </script>
+
+<body>
+            <h2>Login Page</h2>
+
+
+    <div>
+        <form name="login_form" action="process_login" method="POST">
+            <main>
+                <div class="container">
+                    <div class="row">
+
+                        
+                            <input type="text" name="username" size="40" placeholder="enter username"><br />
+                            <input type="password" name="password" size="40" placeholder="enter password"><br />
+                            <input type="submit" value="Submit" id="submit" name = "submit_button">
+                        </form>
+
+                        <input type="button"  value="Register" id = "register"
+                        onclick="window.location='./registration_page.html?' + location.search;">
+
+
+            </main>
+            
+        </form>
+
+</body>
+
+</html>
+
+<script>
+    login_form.action +=   location.search;
+</script>
