@@ -1,0 +1,17 @@
+{
+    "dport": {
+        "fullname": "Dan Port",
+        "email": "dport@hawaii.edu",
+        "password": "password"
+    },
+    "ITM352": {
+        "fullname": "itm352 grader",
+        "email": "itm352@hawaii.edu",
+        "password": "grader"
+    },
+    "namahoeb": {
+        "name": "Brandy Namahoe",
+        "password": "BrandyNamahoe",
+        "email": "namahoeb@hawaii.edu"
+    }
+}
